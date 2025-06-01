@@ -310,13 +310,14 @@ Store Updates
 ☐ [SQL Workspace Demo](https://sql-workspace-afa5d.web.app)
 
 ### Walkthrough Video
-☐ [Video Link]
+1. [6 Mins Walkthrough](https://www.youtube.com/watch?v=d-M8WQdnqzE)
+2. [14 Mins Walkthrough](https://www.youtube.com/watch?v=6-PLJ1FHzY8)
 
 ## Deliverables Checklist
 
-| Deliverable           | Status |
-| --------------------- | ------ |
-| Code Repository       |    ✓   |
-| Live Demo             |    ✓   |
-| Walkthrough Video     |    ☐   |
-| README with details   |    ✓   |
+| Deliverable         | Status |
+| ------------------- | ------ |
+| Code Repository     | ✓      |
+| Live Demo           | ✓      |
+| Walkthrough Video   | ✓      |
+| README with details | ✓      |
