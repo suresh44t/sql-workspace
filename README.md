@@ -88,6 +88,7 @@ npm run serve
   - Fast query execution
   - Efficient state management
   - Optimized rendering
+    ![Performance metrics](public/performance-metrics.png)
   
 - **Accessibility**
   - ARIA labels
