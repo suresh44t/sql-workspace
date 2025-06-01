@@ -1,0 +1,27 @@
+// Export options container
+.results-export { 
+  // Export buttons layout
+  &-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+  }
+
+  // Export button styling
+  .btn {
+    min-width: 120px;
+    height: 36px;
+    font-weight: var(--font-weight-medium);
+
+    &-outlined {
+      border-color: rgba(var(--border-rgb), 0.2);
+      color: var(--text-secondary);
+
+      &:hover:not(:disabled) {
+        background: rgba(var(--border-rgb), 0.05);
+        border-color: rgba(var(--border-rgb), 0.3);
+      }
+    }
+  }
+}

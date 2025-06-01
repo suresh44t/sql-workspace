@@ -1,0 +1,120 @@
+// Main workspace container with grid layout
+.workspace {
+  display: grid;
+  grid-template-areas: "main history";
+  grid-template-columns: 1fr 300px;
+  grid-gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; 
+  box-sizing: border-box; 
+  background: var(--bg-secondary);
+
+  // Tablet breakpoint
+  @media (max-width: 1024px) {
+    grid-template-areas: 
+      "main"
+      "history";
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100vh;
+
+    &-history {
+      width: 100%;
+      height: 400px;
+    }
+  }
+
+  // Mobile breakpoint
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm);
+    grid-gap: var(--spacing-sm);
+
+    &-history {
+      height: 300px;
+    }
+
+    &-query {
+      height: 250px;
+    }
+  }
+  
+  // Main content area with query and results
+  &-main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      gap: var(--spacing-sm);
+    }
+  }
+
+  // History panel container
+  &-aside {
+    overflow: hidden;
+  }
+
+  // History panel styling
+  &-history {
+    grid-area: history;
+    width: 320px;
+    height: 100%;
+    background: var(--bg-primary);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  // Vertical split between query and results
+  &-split {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      gap: var(--spacing-sm);
+    }
+  }
+
+  // Query editor container
+  &-query {
+    flex: 1;
+    min-height: 0;
+    height: 300px;
+    overflow: hidden;
+
+    @media (max-width: 1024px) {
+      height: 200px;
+    }
+
+    @media (max-width: 768px) {
+      height: 150px;
+    }
+  }
+
+  // Results grid container
+  &-results {
+    flex: 2;
+    min-height: 0;
+    overflow: hidden;
+
+    @media (max-width: 1024px) {
+      flex: 3;
+    }
+
+    @media (max-width: 768px) {
+      flex: 4;
+    }
+  }
+}

@@ -1,0 +1,54 @@
+// Error message component styling
+.error-message {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  background-color: rgba(var(--danger-rgb), 0.05);
+  border: 1px solid rgba(var(--danger-rgb), 0.2);
+  border-radius: var(--border-radius);
+  color: var(--danger);
+
+  // Error message header with warning icon
+  &-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    // Warning emoji as icon
+    &::before {
+      content: '⚠️';
+      font-size: 1.2rem;
+    }
+  }
+
+  // Error message text content
+  &-content {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  // Focus state styling
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(var(--danger-rgb), 0.5);
+  }
+
+  // Entry animation effect
+  animation: errorFadeIn 0.3s ease-in-out;
+}
+
+// Fade in animation for error message
+@keyframes errorFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,163 @@
+// Base button styles and layout
+.button { 
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: var(--spacing-xs); 
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer; 
+  transition: all var(--transition-duration-fast) var(--transition-timing);
+  position: relative; 
+  overflow: hidden; 
+  user-select: none;
+
+  // Disabled state styling
+  &:disabled { 
+    opacity: 0.6; 
+    cursor: not-allowed;
+    color: var(--bg-secondary);
+  } 
+
+  // Button size variations
+  &-sm { 
+    height: 32px;
+    padding: 0 var(--spacing-md);
+    font-size: 0.75rem;
+    min-width: 70px;
+  } 
+
+  &-md { 
+    height: 40px;
+    padding: 0 var(--spacing-lg);
+    font-size: var(--font-size-sm);
+    min-width: 120px;
+  } 
+
+  &-lg { 
+    height: 48px;
+    padding: 0 var(--spacing-xl);
+    font-size: var(--font-size-md);
+    min-width: 160px;
+  } 
+
+  // Button color variants
+  &-primary { 
+    background: var(--primary); 
+    color: var(--white);
+
+    &:hover:not(:disabled) { 
+      background: var(--primary-dark);
+    } 
+  } 
+
+  &-secondary { 
+    background: var(--secondary); 
+    color: var(--white); 
+
+    &:hover:not(:disabled) { 
+      background: var(--secondary-dark); 
+    } 
+  } 
+
+  &-success { 
+    background: var(--success); 
+    color: var(--white); 
+
+    &:hover:not(:disabled) { 
+      background: var(--success-dark); 
+    } 
+  } 
+
+  &-danger { 
+    background: var(--danger); 
+    color: var(--white); 
+
+    &:hover:not(:disabled) { 
+      background: var(--danger-dark); 
+    } 
+  } 
+
+  &-warning { 
+    background: var(--warning); 
+    color: var(--text-primary);
+
+    &:hover:not(:disabled) { 
+      background: var(--warning-dark); 
+    } 
+  } 
+
+  &-info { 
+    background: var(--info); 
+    color: var(--white); 
+
+    &:hover:not(:disabled) { 
+      background: var(--info-dark); 
+    } 
+  } 
+
+  // Outlined button variant
+  &-outlined { 
+    background: transparent;
+    border: 1px solid rgb(var(--border-rgb));
+    color: var(--text-secondary);
+
+    &:hover:not(:disabled) { 
+      background: var(--bg-secondary);
+      border-color: rgb(var(--primary-rgb));
+      color: var(--primary);
+    } 
+
+    &.button-primary {
+      border-color: rgb(var(--primary-rgb));
+      color: var(--primary);
+
+      &:hover:not(:disabled) {
+        background: var(--primary);
+        border-color: rgb(var(--primary-rgb));
+        color: var(--white);
+      }
+    }
+
+    &:disabled {
+      border-color: rgb(var(--border-rgb));
+      color: var(--text-disabled);
+      background: transparent;
+    }
+  } 
+
+  // Loading state animations and styles
+  &-loading { 
+    cursor: wait;
+    pointer-events: none;
+
+    .button-text { 
+      opacity: 0.5; 
+    } 
+  } 
+
+  &-spinner { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 1em; 
+    height: 1em; 
+    border: 2px solid currentColor; 
+    border-right-color: transparent; 
+    border-radius: var(--radius-full);
+    animation: button-spin 0.75s var(--transition-timing) infinite;
+  } 
+} 
+
+// Loading spinner animation
+@keyframes button-spin { 
+  from { 
+    transform: translate(-50%, -50%) rotate(0deg); 
+  } 
+  to { 
+    transform: translate(-50%, -50%) rotate(360deg); 
+  } 
+}

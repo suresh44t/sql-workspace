@@ -1,0 +1,45 @@
+.toasts {
+  // Fixed positioning for toast container
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: var(--z-toast);
+
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  pointer-events: none;
+
+  // Enable click events on individual toasts
+  > * {
+    pointer-events: auto;
+  }
+
+  // Stack toasts with consistent spacing
+  > .toast {
+    margin: 0;
+    margin-top: 8px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  // Custom scrollbar appearance
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar);
+    border-radius: var(--border-radius);
+  }
+}

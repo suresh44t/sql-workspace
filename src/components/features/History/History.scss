@@ -1,0 +1,104 @@
+// Main history component container
+.history {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  position: relative;
+  border: 1px solid var(--primary-medium);
+
+  // Title section of the history panel
+  &-header {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--primary-light);
+    background: var(--bg-primary);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  // Scrollable container for history items
+  &-list {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    padding: var(--spacing-sm);
+  }
+
+  // Individual history entry styling
+  &-item {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--primary-light);
+    margin-bottom: var(--spacing-sm);
+    transition: all var(--transition-duration-fast) var(--transition-timing);
+    background: var(--bg-primary);
+
+    &:not(.is-latest) {
+      cursor: pointer;
+      
+      &:hover {
+        background: rgba(var(--primary-rgb), 0.02);
+        border-color: rgba(var(--primary-rgb), 0.3);
+      }
+    }
+
+    &.is-latest {
+      opacity: 0.7;
+      cursor: not-allowed;
+      background: var(--bg-secondary);
+    }
+
+    &.is-success {
+      border-left: 3px solid var(--success);
+    }
+
+    &.is-active {
+      background: rgba(var(--primary-rgb), 0.04);
+      border-color: rgb(var(--primary-rgb));
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // History item header with metadata
+  &-item-header {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+  }
+
+  &-item-time,
+  &-item-rows,
+  &-item-duration {
+    flex: 0 0 auto;
+  }
+
+  &-item-query {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-snug);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-primary);
+  }
+
+  // Styling for empty history state
+  &-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-secondary);
+    font-style: italic;
+    padding: var(--spacing-xl);
+    text-align: center;
+  }
+}

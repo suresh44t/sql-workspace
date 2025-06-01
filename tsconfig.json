@@ -1,0 +1,53 @@
+{  
+  "compilerOptions": {  
+    "target": "es5",  
+    "lib": [  
+      "dom",  
+      "dom.iterable",  
+      "esnext"  
+    ],
+    "baseUrl": ".",  
+    "paths": {  
+      "@/*": ["src/*"],  
+      "@components/*": ["src/components/*"],  
+      "@common/*": ["src/components/common/*"],  
+      "@features/*": ["src/components/features/*"],
+      "@constants/*": ["src/constants/*"],
+      "@data/*": ["src/data/*"],
+      "@hooks/*": ["src/store/hooks/*"],    
+      "@store/*": ["src/store/*"],  
+      "@slices/*": ["src/store/slices/*"],  
+      "@styles/*": ["src/styles/*"], 
+      "@tests/*": ["src/tests/*"],
+      "@types/*": ["src/types/*"], 
+      "@utils/*": ["src/utils/*"] 
+    },
+    "allowJs": true,  
+    "skipLibCheck": true,  
+    "esModuleInterop": true,  
+    "allowSyntheticDefaultImports": true,  
+    "strict": true,  
+    "forceConsistentCasingInFileNames": true,  
+    "noFallthroughCasesInSwitch": true,  
+    "module": "esnext",  
+    "moduleResolution": "node",  
+    "resolveJsonModule": true,  
+    "isolatedModules": true,  
+    "noEmit": true,  
+    "jsx": "react-jsx" 
+  },
+  "include": [  
+    "src/**/*"  
+  ],
+  "exclude": [  
+    "node_modules",  
+    "build",  
+    "dist",  
+    "coverage",  
+    "**/*.test.*",  
+    "**/__tests__/*",  
+    "src/setupTests.ts",  
+    "src/**/*.test.ts",  
+    "src/**/*.test.tsx"  
+  ]
+}

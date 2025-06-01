@@ -1,0 +1,68 @@
+// Pagination container with responsive layout
+.results-pagination { 
+  flex: 0 0 auto;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding: var(--spacing-md) var(--spacing-lg); 
+  border-top: 1px solid rgba(0, 112, 243, 0.15);
+  position: relative;
+  z-index: var(--z-dropdown); 
+  overflow: visible; 
+  
+  @media (max-width: 1024px) {
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+
+    .select {
+      flex: 1;
+      max-width: 200px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    justify-content: center;
+
+    .select {
+      flex: 1 1 100%;
+      max-width: none;
+    }
+  }
+
+  // Navigation controls layout
+  &-nav { 
+    display: flex; 
+    align-items: center; 
+    gap: var(--spacing-sm); 
+
+    @media (max-width: 768px) {
+      width: 100%;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      
+      :global .btn {
+        padding: 0 var(--spacing-sm);
+        min-width: 32px;
+      }
+    }
+  }
+
+  // Page information display
+  &-info {
+    color: var(--text-secondary);
+    padding: 0 var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+
+    @media (max-width: 768px) {
+      order: -1;
+      width: 100%;
+      text-align: center;
+      margin-bottom: var(--spacing-sm);
+    }
+  }
+}

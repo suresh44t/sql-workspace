@@ -1,0 +1,56 @@
+// Loading spinner container with flexible sizing
+.loading-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  // Color variants for different contexts
+  &.variant {
+    &-primary {
+      color: var(--primary);
+    }
+
+    &-secondary {
+      color: var(--text-secondary);
+    }
+
+    &-inverted {
+      color: var(--text-inverted);
+    }
+  }
+
+  // Size variations for different use cases
+  &.size {
+    &-sm {
+      width: 16px;
+      height: 16px;
+    }
+
+    &-md {
+      width: 24px;
+      height: 24px;
+    }
+
+    &-lg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  // SVG element with rotation animation
+  svg {
+    width: 100%;
+    height: 100%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+// Rotation animation for the spinner
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

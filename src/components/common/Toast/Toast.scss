@@ -1,0 +1,62 @@
+// Toast notification container
+.toast {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  margin-top: 8px;
+  min-width: 280px;
+  max-width: 520px;
+  border-radius: var(--radius-md);
+  border: 2px solid;
+  border-left-width: 6px;
+  box-shadow: var(--elevation-2);
+  position: relative;
+  background: var(--white);
+
+  // Entry animation
+  animation: toastEnter 0.3s ease-out;
+
+  // Toast type variations
+  &.toast-success {
+    border-color: var(--success);
+    color: var(--success);
+  }
+
+  &.toast-error {
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+
+  &.toast-warning {
+    border-color: var(--warning);
+    color: var(--warning);
+  }
+
+  &.toast-info {
+    border-color: var(--info);
+    color: var(--info);
+  }
+
+  // Toast content layout
+  &-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &-message {
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+}
+
+// Fade in animation keyframes
+@keyframes toastEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
