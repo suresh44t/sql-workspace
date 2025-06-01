@@ -307,7 +307,7 @@ Store Updates
 ### GitHub Repo with Code
 ☐ [SQL Workspace Repository](https://github.com/suresh44t/sql-workspace)
 
-### Vercel Live Demo
+### Live Demo
 ☐ [SQL Workspace Demo](https://sql-workspace-afa5d.web.app)
 
 ### Walkthrough Video
