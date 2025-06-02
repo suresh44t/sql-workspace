@@ -16,37 +16,15 @@ export const Select: FC<SelectInterface> = ({
   direction = 'down', 
   'aria-label': ariaLabel 
 }) => { 
-  // Refs for dropdown positioning and width measurement
+  // Ref for dropdown positioning
   const containerRef = useRef<HTMLDivElement>(null); 
-  const measureRef = useRef<HTMLDivElement>(null); 
-  const widthRef = useRef(40);
 
   // State for dropdown visibility and keyboard navigation
   const [isOpen, setIsOpen] = useState(false); 
   const [highlightedIndex, setHighlightedIndex] = useState(0); 
-  const [width, setWidth] = useState<number | null>(null); 
-
-  // Effects after all state declarations
-  // Calculate dropdown width based on option content
-  useEffect(() => {
-    // Width measurement
-    if (measureRef.current) {
-      let maxWidth = 40;
-      const measurer = measureRef.current;
-      
-      for (const option of options) {
-        measurer.textContent = option.label;
-        maxWidth = Math.max(maxWidth, measurer.offsetWidth + 40);
-      }
-      
-      widthRef.current = maxWidth;
-      setWidth(maxWidth);
-    }
-  }, [options]);
 
   // Handle clicks outside the select component
   useEffect(() => { 
-    // Click outside handler
     const handler = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) { 
         setIsOpen(false); 
@@ -57,7 +35,7 @@ export const Select: FC<SelectInterface> = ({
     return () => document.removeEventListener('mousedown', handler); 
   }, []); 
 
-  // Derived values after all hooks
+  // Derived values
   const selectedOption = options.find(opt => opt.value === value); 
   const classes = [ 
     'select', 
@@ -129,20 +107,7 @@ export const Select: FC<SelectInterface> = ({
       aria-haspopup="listbox"
       aria-activedescendant={isOpen ? `select-option-${highlightedIndex}` : undefined}
       aria-label={ariaLabel || 'Select'} 
-      style={{ width: width ? `${width}px` : undefined }} 
     > 
-      <div 
-        ref={measureRef} 
-        style={{ 
-          position: 'absolute', 
-          visibility: 'hidden', 
-          whiteSpace: 'nowrap', 
-          fontFamily: 'inherit', 
-          fontSize: 'inherit', 
-          fontWeight: 'inherit' 
-        }} 
-      /> 
-
       <div 
         className="select-trigger" 
         onClick={() => !disabled && setIsOpen(!isOpen)} 

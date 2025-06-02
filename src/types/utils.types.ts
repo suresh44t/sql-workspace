@@ -1,7 +1,7 @@
 import { Metric } from 'web-vitals'; 
 
 // Data export format options
-export type ExportFormatType = 'csv' | 'xlsx' | 'json'; 
+export type ExportFormatType = 'csv' | 'json';
 
 // Performance metric interfaces
 export interface CLSMetricInterface extends Metric { 
@@ -48,11 +48,6 @@ export interface BenchmarksInterface {
   FCP: BenchmarkInterface; 
   LCP: BenchmarkInterface; 
   TTFB: BenchmarkInterface; 
-} 
-
-// Status color mapping
-export interface ColorCodesInterface { 
-  [key: string]: string; 
 } 
 
 // Performance report data structure

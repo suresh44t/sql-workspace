@@ -58,24 +58,20 @@ const HistoryContent: FC<HistoryInterface> = memo(({
     <div 
       id="history" 
       className={`history ${className}`.trim()} 
-      role="complementary" 
       aria-label="Query History" 
     > 
       <h2 className="history-header" id="history-title"> 
         Query History {metadata.totalItems > 0 && `(${metadata.totalItems})`} 
-      </h2> 
-      <div 
-        className="history-list" 
-        role="list" 
-        aria-labelledby="history-title" 
-      > 
-        {items.length === 0 ? ( 
-          <div className="history-empty" role="alert"> 
-            No queries executed yet 
-          </div> 
-        ) : ( 
-          items.map((entry: HistoryItemInterface, index: number) => ( 
-            <div 
+      </h2>
+
+      {items.length === 0 ? ( 
+        <div className="history-empty" role="status"> 
+          No queries executed yet 
+        </div> 
+      ) : ( 
+        <ul className="history-list" aria-labelledby="history-title"> 
+          {items.map((entry: HistoryItemInterface, index: number) => ( 
+            <li 
               key={entry.id} 
               className={`history-item ${entry.executionTime ? 'is-success' : ''} ${index === 0 ? 'is-latest' : ''}`} 
               onClick={() => handleItemClick(entry)} 
@@ -86,7 +82,6 @@ const HistoryContent: FC<HistoryInterface> = memo(({
                   handleItemClick(entry); 
                 } 
               }} 
-              role="button" 
               tabIndex={0} 
               aria-label={`${index === 0 ? 'Latest query' : 'Previous query'}: ${entry.text}`} 
               aria-current={index === 0 ? 'true' : undefined} 
@@ -110,10 +105,10 @@ const HistoryContent: FC<HistoryInterface> = memo(({
               <div className="history-item-query"> 
                 {entry.text} 
               </div> 
-            </div> 
-          )) 
-        )} 
-      </div> 
+            </li> 
+          ))} 
+        </ul>
+      )} 
 
       {isLoading && <LoadingBackdrop isLoading />} 
     </div> 

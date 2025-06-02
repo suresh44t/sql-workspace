@@ -16,9 +16,8 @@
 
   // Disabled state styling
   &:disabled { 
-    opacity: 0.6; 
+    opacity: 0.8; 
     cursor: not-allowed;
-    color: var(--bg-secondary);
   } 
 
   // Button size variations
@@ -119,12 +118,6 @@
         border-color: rgb(var(--primary-rgb));
         color: var(--white);
       }
-    }
-
-    &:disabled {
-      border-color: rgb(var(--border-rgb));
-      color: var(--text-disabled);
-      background: transparent;
     }
   } 
 

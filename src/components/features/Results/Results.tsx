@@ -1,4 +1,3 @@
-// Component imports and type definitions
 import { FC, memo, useCallback, useMemo, useRef, useState } from 'react'; 
 import { ErrorMessage, ErrorBoundary, LoadingBackdrop } from '@/components/common'; 
 import { useResults } from '@/hooks'; 
@@ -110,21 +109,25 @@ const ResultsContent: FC<ResultsInterface> = memo(({
     return ( 
       <div 
         ref={headerRef} 
-        className="results-table-header" 
-        role="rowgroup" 
+        className="results-table-header"
+        role="presentation"
       > 
         {table.getHeaderGroups().map(headerGroup => ( 
-          <div key={headerGroup.id} className="results-header"> 
+          <div key={headerGroup.id} className="results-header" role="row"> 
             {headerGroup.headers.map(header => ( 
               <div 
                 key={header.id} 
                 className="results-header-cell" 
+                role="columnheader"
+                aria-sort={header.column.getIsSorted() === 'asc' ? 'ascending' : 
+                          header.column.getIsSorted() === 'desc' ? 'descending' : 
+                          'none'}
                 style={{ width: header.getSize() }} 
                 onClick={header.column.getToggleSortingHandler()} 
               > 
                 {String(header.column.columnDef.header)} 
                 {header.column.getIsSorted() && ( 
-                  <span className={`results-header-sort is-${header.column.getIsSorted()}`}> 
+                  <span className={`results-header-sort is-${header.column.getIsSorted()}`} aria-hidden="true"> 
                     {header.column.getIsSorted() === 'asc' ? '↑' : '↓'} 
                   </span> 
                 )} 
@@ -142,11 +145,7 @@ const ResultsContent: FC<ResultsInterface> = memo(({
       className={`results ${className}`.trim()} 
       aria-label="Query Results" 
     > 
-      <div 
-        className="results-content" 
-        role="grid" 
-        tabIndex={0} 
-      > 
+      <div className="results-content"> 
         <Toolbar 
           globalFilter={globalFilter} 
           onGlobalFilterChange={setGlobalFilter} 
@@ -155,14 +154,14 @@ const ResultsContent: FC<ResultsInterface> = memo(({
           disabled={!results?.length} 
         /> 
 
-        <div className="results-table"> 
+        <div className="results-table" role="grid" aria-label="Query Results Table"> 
           {renderTableHeader()} 
 
           <div 
             ref={tableContainerRef} 
-            className="results-table-body" 
-            role="rowgroup" 
-            onScroll={handleTableScroll} 
+            className="results-table-body"
+            role="presentation"
+            onScroll={handleTableScroll}
           > 
             {error ? ( 
               <ErrorMessage 
@@ -170,7 +169,7 @@ const ResultsContent: FC<ResultsInterface> = memo(({
                 title="Query Results Error" 
               /> 
             ) : !rows.length ? ( 
-              <div className="results-empty"> 
+              <div className="results-empty" aria-live="polite"> 
                 No Results Found 
               </div> 
             ) : ( 
@@ -194,7 +193,7 @@ const ResultsContent: FC<ResultsInterface> = memo(({
                       <div 
                         key={cell.id} 
                         className="results-cell" 
-                        role="cell" 
+                        role="gridcell" 
                         style={{ width: cell.column.getSize() }} 
                       > 
                         {String(cell.getValue())} 

@@ -56,3 +56,4 @@ Thumbs.db
 # Cache directories
 .cache/
 .eslintcache
+.webpack-cache/

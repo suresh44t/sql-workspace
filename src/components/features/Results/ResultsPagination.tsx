@@ -49,11 +49,10 @@ const ResultsPagination: FC<ResultsPaginationInterface> = ({
   return ( 
     <nav 
       className="results-pagination" 
-      role="navigation" 
       aria-label="Results pagination" 
       onKeyDown={handleKeyDown} 
     > 
-      <div className="results-pagination-size"> 
+      <div className="results-pagination-size" role="group" aria-label="Rows per page"> 
         <Select 
           options={pageSizeOptions} 
           value={pageSize.toString()} 
@@ -66,7 +65,7 @@ const ResultsPagination: FC<ResultsPaginationInterface> = ({
         /> 
       </div> 
 
-      <div className="results-pagination-nav"> 
+      <div className="results-pagination-nav" role="group" aria-label="Page navigation"> 
         <Button 
           size="sm" 
           variant="outlined" 
@@ -85,7 +84,7 @@ const ResultsPagination: FC<ResultsPaginationInterface> = ({
         > 
           {'<'} 
         </Button> 
-        <span className="results-pagination-info"> 
+        <span className="results-pagination-info" role="status" aria-live="polite"> 
           {pageCount === 0 ? ( 
             'Page 0 of 0' 
           ) : ( 

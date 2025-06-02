@@ -143,9 +143,10 @@
   --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
 
   // Stack order values
-  --z-drawer: 1000;
-  --z-dropdown: 1010;
-  --z-sticky: 1020;
+  --z-skip-link: 1000;
+  --z-drawer: 1010;
+  --z-dropdown: 1020;
+  --z-sticky: 1030;
   --z-fixed: 1030;
   --z-modal: 1040;
   --z-popover: 1050;

@@ -1,5 +1,4 @@
-import { saveAs } from 'file-saver'; 
-import { utils as XLSXUtils, write as writeXLSX } from 'xlsx'; 
+import { saveAs } from 'file-saver';
 import { 
   CompanyRecordInterface, 
   ColumnDefinitionInterface, 
@@ -35,34 +34,6 @@ const exportAsCSV = (
   saveAs(blob, `query-results-${new Date().toISOString()}.csv`); 
 }; 
 
-// Export data to Excel format
-const exportAsExcel = ( 
-  data: CompanyRecordInterface[], 
-  columns: ColumnDefinitionInterface[] 
-): void => { 
-  // Extract column headers
-  const headers = columns.map(col => col.label); 
-  
-  // Convert records to array format
-  const rows = data.map(row => 
-    columns.map(col => row[col.name]) 
-  ); 
-
-  // Generate Excel worksheet
-  const worksheet = XLSXUtils.aoa_to_sheet([headers, ...rows]); 
-  
-  // Create Excel workbook with data
-  const workbook = XLSXUtils.book_new(); 
-  XLSXUtils.book_append_sheet(workbook, worksheet, 'Results'); 
-
-  // Convert workbook to buffer
-  const excelBuffer = writeXLSX(workbook, { bookType: 'xlsx', type: 'array' }); 
-  
-  // Create downloadable Excel file
-  const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }); 
-  saveAs(blob, `query-results-${new Date().toISOString()}.xlsx`); 
-}; 
-
 // Export data to JSON format
 const exportAsJSON = (data: CompanyRecordInterface[]): void => { 
   const jsonContent = JSON.stringify(data, null, 2); 
@@ -81,9 +52,6 @@ export const exportResultsData = (
   switch (format) { 
     case 'csv': 
       exportAsCSV(data, columns); 
-      break; 
-    case 'xlsx': 
-      exportAsExcel(data, columns); 
       break; 
     case 'json': 
       exportAsJSON(data); 

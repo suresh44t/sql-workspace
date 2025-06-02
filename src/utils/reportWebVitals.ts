@@ -8,7 +8,6 @@ import {
   BenchmarksInterface, 
   MetricKeyType, 
   MetricRatingType, 
-  ColorCodesInterface, 
   MetricRowDataInterface 
 } from '@/types'; 
 
@@ -50,8 +49,6 @@ const formatValueWithUnit = (metric: MetricKeyType, value: number): string => {
   } 
 }; 
 
-// Clean up console color codes
-const stripAnsi = (str: string) => str.replace(/\[\d+m|\[\d+;\d+m/g, ''); 
 
 // Display formatted metric data in console
 const printMetricTable = (metric: MetricKeyType, value: number): void => { 
@@ -65,28 +62,17 @@ const printMetricTable = (metric: MetricKeyType, value: number): void => {
   const rawThreshold = formatValueWithUnit(metric, threshold); 
   const rawDiff = formatValueWithUnit(metric, diff); 
 
-  // Console output color mapping
-  const colorCodes: ColorCodesInterface = { 
-    '#4caf50': '[32m', 
-    '#ff9800': '[33m', 
-    '#f44336': '[31m', 
-    reset: '[0m' 
-  }; 
-
-  const color = colorCodes[hexColor] || ''; 
-  const {reset} = colorCodes; 
-
-  const coloredValue = `${color}${rawValue}${reset}`; 
-  const coloredStatus = `${color}${rating}${reset}`; 
-  const coloredDiff = `${color}${rawDiff}${reset}`; 
+  // Console styles for output
+  const styleValue = `color: ${hexColor}; font-weight: bold`;
+  const styleNormal = 'color: inherit';
 
   // Format row data for table
   const row: MetricRowDataInterface = { 
     Metric: metric, 
-    Value: stripAnsi(coloredValue), 
+    Value: rawValue, 
     Threshold: rawThreshold, 
-    Difference: stripAnsi(coloredDiff), 
-    Status: stripAnsi(coloredStatus) 
+    Difference: rawDiff, 
+    Status: rating 
   }; 
 
   // Determine column widths
@@ -95,17 +81,17 @@ const printMetricTable = (metric: MetricKeyType, value: number): void => {
 
   // Pad cells to match column width
   const formatCell = (str: string, width: number) => 
-    str + ' '.repeat(width - stripAnsi(str).length); 
+    str + ' '.repeat(width - str.length);
 
   // Generate table structure
   const headerRow = `│ ${headers.map((h, i) => formatCell(h, widths[i])).join(' │ ')} │`; 
   const separator = `├${widths.map(w => '─'.repeat(w + 2)).join('┼')}┤`; 
   const dataRow = `│ ${[ 
     formatCell(metric, widths[0]), 
-    formatCell(coloredValue, widths[1]), 
+    `%c${formatCell(rawValue, widths[1])}%c`, 
     formatCell(rawThreshold, widths[2]), 
-    formatCell(coloredDiff, widths[3]), 
-    formatCell(coloredStatus, widths[4]) 
+    `%c${formatCell(rawDiff, widths[3])}%c`, 
+    `%c${formatCell(rating, widths[4])}%c` 
   ].join(' │ ')} │`; 
   const borderTop = `┌${widths.map(w => '─'.repeat(w + 2)).join('┬')}┐`; 
   const borderBottom = `└${widths.map(w => '─'.repeat(w + 2)).join('┴')}┘`; 
@@ -113,7 +99,17 @@ const printMetricTable = (metric: MetricKeyType, value: number): void => {
   // Output metric table
   const label = benchmark.label || metric; 
   console.group(`Web Vital: ${label} (${metric})`); 
-  console.log([borderTop, headerRow, separator, dataRow, borderBottom].join('\n')); 
+  // Output table with styles
+  console.log(
+    [borderTop, headerRow, separator].join('\n')
+  );
+  console.log(
+    dataRow, 
+    styleValue, styleNormal, 
+    styleValue, styleNormal,
+    styleValue, styleNormal
+  );
+  console.log(borderBottom);
   console.groupEnd(); 
 }; 
 

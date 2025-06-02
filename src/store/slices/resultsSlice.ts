@@ -1,5 +1,4 @@
-import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit'; 
-import { columnDefinitions } from '@/data/mockData'; 
+import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit';
 import { 
   CompanyRecordInterface, 
   ColumnDefinitionInterface, 
@@ -26,10 +25,7 @@ const resultsSlice = createSlice({
   reducers: { 
     // Store query execution results
     setResults(state, action: PayloadAction<ResultsDataInterface>) { 
-      state.data = { 
-        ...action.payload, 
-        columns: columnDefinitions  // Use column definitions with labels 
-      }; 
+      state.data = action.payload;
       state.status = 'success'; 
       state.error = null; 
     }, 
@@ -82,7 +78,7 @@ export const selectResultsData = createSelector(
 // Get result column definitions
 export const selectResultsColumns = createSelector( 
   [selectResultsState], 
-  (): ColumnDefinitionInterface[] => columnDefinitions 
+  (state): ColumnDefinitionInterface[] => state.data?.columns || [] 
 ); 
 
 // Get current execution status

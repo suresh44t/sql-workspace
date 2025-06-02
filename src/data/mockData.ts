@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker'; 
 import { 
   CompanyNameType, 
   CompanyRecordInterface, 
@@ -19,7 +18,7 @@ export const columnDefinitions: ColumnDefinitionInterface[] = [
   { name: 'id', type: 'number', label: 'ID', size: COLUMN_WIDTHS.SMALL }, 
   { name: 'company', type: 'string', label: 'Company', size: COLUMN_WIDTHS.MEDIUM }, 
   { name: 'department', type: 'string', label: 'Department', size: COLUMN_WIDTHS.MEDIUM }, 
-  { name: 'employee_count', type: 'number', label: 'Employee Count', size: COLUMN_WIDTHS.SMALL }, 
+  { name: 'employee_count', type: 'number', label: 'Employee Count', size: COLUMN_WIDTHS.MEDIUM }, 
   { name: 'revenue', type: 'number', label: 'Revenue ($)', size: COLUMN_WIDTHS.MEDIUM }, 
   { name: 'location', type: 'string', label: 'Location', size: COLUMN_WIDTHS.MEDIUM }, 
   { name: 'founded_year', type: 'number', label: 'Founded Year', size: COLUMN_WIDTHS.SMALL }, 
@@ -61,7 +60,10 @@ const formatDate = (date: Date): string => {
   }); 
 }; 
 
-export const generateMockData = (): CompanyRecordInterface[] => { 
+// Generate mock data asynchronously
+export const generateMockData = async (): Promise<CompanyRecordInterface[]> => {
+  // Dynamic import of faker
+  const { faker } = await import('@faker-js/faker');
   const records: CompanyRecordInterface[] = []; 
 
   // Create mock records with random but realistic data
@@ -85,5 +87,13 @@ export const generateMockData = (): CompanyRecordInterface[] => {
   return records; 
 }; 
 
-// Generate and memoize mock data
-export const mockData = generateMockData();
+// Lazy load and generate mock data
+export const getMockData = async () => {
+  let data: CompanyRecordInterface[] | undefined;
+  
+  if (!data) {
+    data = await generateMockData();
+  }
+  
+  return data;
+};

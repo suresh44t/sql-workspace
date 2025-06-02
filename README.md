@@ -88,7 +88,6 @@ npm run serve
   - Fast query execution
   - Efficient state management
   - Optimized rendering
-    ![Performance metrics](public/performance-metrics.png)
   
 - **Accessibility**
   - ARIA labels
@@ -99,6 +98,11 @@ npm run serve
   - TypeScript type safety
   - Component modularity
   - Consistent code style
+
+- **Performance metrics**
+![Performance metrics](public/performance-metrics.png)
+![Page Speed Insights - Desktop](public/page-speed-insights-desktop.png)
+![Page Speed Insights - Mobile](public/page-speed-insights-mobile.png)
 
 ## Design
 

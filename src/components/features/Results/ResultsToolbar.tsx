@@ -33,15 +33,15 @@ const ResultsToolbar: FC<ResultsToolbarInterface> = ({
       aria-label="Results controls" 
     > 
       <div className="results-search-wrapper" role="search"> 
-        <label className="sr-only">Search results</label> 
+        <label htmlFor="results-search" className="sr-only">Search results</label> 
         <input 
+          id="results-search"
           type="search" 
           value={globalFilter || ''} 
           onChange={e => handleSearchChange(e.target.value)} 
           onKeyDown={handleSearchKeyDown} 
           placeholder="Search results..." 
           className="results-toolbar-search" 
-          aria-label="Search results" 
           disabled={disabled} 
         /> 
       </div> 

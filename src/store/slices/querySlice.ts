@@ -92,14 +92,14 @@ export const executeQuery = (): AppThunkType =>
       
       const companyName = match[1].toLowerCase(); 
 
-      // Load sample data for query
-      const { mockData } = await import('@/data/mockData'); 
+      // Load and generate mock data asynchronously
+      const { getMockData } = await import('@/data/mockData');
+      const mockData = await getMockData();
       
       // Filter results based on company name
-      // For other companies, filter the results 
       const filteredResults = companyName === 'pega' 
         ? mockData 
-        : mockData.filter(record => record.company === companyName); 
+        : mockData.filter(record => record.company === companyName);
 
       if (filteredResults.length === 0) { 
         throw new Error(`No records found for company: ${companyName}`); 

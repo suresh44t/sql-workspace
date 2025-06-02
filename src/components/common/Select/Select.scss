@@ -1,12 +1,13 @@
 // Base select component container
 .select {
   position: relative;
-  display: inline-flex;
+  display: flex; // Changed to flex for full width
+  width: 100%; // Full width by default
   user-select: none;
 
   // Select button styling
   &-trigger {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
@@ -17,6 +18,7 @@
     cursor: pointer;
     transition: all var(--transition-duration-fast) var(--transition-timing);
     white-space: nowrap;
+    min-height: 32px; // Minimum height to prevent layout shift
   }
 
   // Selected option text display
@@ -26,18 +28,28 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     font-weight: var(--font-weight-medium);
+    padding: 0 var(--spacing-sm); // Consistent padding
   }
 
   // Dropdown arrow indicator
   &-arrow {
     flex: none;
-    width: 0;
-    height: 0;
+    width: 20px; // Fixed width to prevent layout shift
+    height: 20px; // Fixed height to prevent layout shift
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-left: var(--spacing-sm);
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid var(--text-secondary);
-    transition: transform var(--transition-duration-fast) var(--transition-timing);
+    
+    &::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid var(--text-secondary);
+      transition: transform var(--transition-duration-fast) var(--transition-timing);
+    }
   }
 
   // Options dropdown container
@@ -52,18 +64,21 @@
     box-shadow: var(--shadow-lg);
     max-height: 250px;
     overflow-y: auto;
+    margin-top: 2px; // Consistent spacing
   }
 
   // Dropdown position variants
   &-down {
     .select-dropdown {
-      top: calc(100% + 4px);
+      top: 100%;
     }
   }
 
   &-up {
     .select-dropdown {
-      bottom: calc(100% + 4px);
+      bottom: 100%;
+      margin-top: 0;
+      margin-bottom: 2px;
     }
   }
 
@@ -95,6 +110,9 @@
     cursor: pointer;
     transition: all var(--transition-duration-fast) var(--transition-timing);
     white-space: nowrap;
+    min-height: 32px; // Minimum height to prevent layout shift
+    display: flex;
+    align-items: center;
 
     &:hover {
       background: rgba(var(--primary-rgb), 0.04);
@@ -116,11 +134,11 @@
       height: 32px;
       padding: 0 var(--spacing-md);
       font-size: var(--font-size-xs);
-      min-width: 80px;
     }
     .select-option {
       padding: calc(var(--spacing-xs) + 2px) var(--spacing-md);
       font-size: var(--font-size-xs);
+      min-height: 32px;
     }
   }
 
@@ -129,11 +147,11 @@
       height: 40px;
       padding: 0 var(--spacing-md);
       font-size: var(--font-size-sm);
-      min-width: 120px;
     }
     .select-option {
       padding: var(--spacing-sm) var(--spacing-md);
       font-size: var(--font-size-sm);
+      min-height: 40px;
     }
   }
 
@@ -142,11 +160,11 @@
       height: 48px;
       padding: 0 var(--spacing-lg);
       font-size: var(--font-size-md);
-      min-width: 160px;
     }
     .select-option {
       padding: var(--spacing-md) var(--spacing-lg);
       font-size: var(--font-size-md);
+      min-height: 48px;
     }
   }
 
@@ -164,7 +182,7 @@
         box-shadow: 0 2px 6px rgba(var(--primary-rgb), 0.3);
       }
 
-      .select-arrow {
+      .select-arrow::after {
         border-top-color: var(--white);
       }
     }
@@ -176,12 +194,12 @@
       border-color: rgb(var(--border-rgb));
       color: var(--text-secondary);
 
-      &:hover:not(:disabled) {
+      &:hover {
         background: var(--bg-secondary);
         border-color: rgb(var(--primary-rgb));
         color: var(--primary);
 
-        .select-arrow {
+        .select-arrow::after {
           border-top-color: var(--primary);
         }
       }
@@ -194,34 +212,24 @@
       border-color: var(--primary);
       box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
     }
-    .select-arrow {
+    .select-arrow::after {
       transform: rotate(180deg);
     }
   }
 
   &.is-disabled {
-    opacity: 0.6;
-    pointer-events: none;
+    // pointer-events: none;
+    opacity: 0.8;
 
     .select-trigger {
-      background: var(--bg-secondary);
+      background: transparent;
       border-color: rgb(var(--border-rgb));
-      color: var(--text-disabled);
+      color: var(--text-secondary);
       cursor: not-allowed;
-    }
-  }
 
-  // Mobile responsive adjustments
-  @media (max-width: 768px) {
-    width: 100% !important;
-    max-width: none !important;
-
-    .select-trigger {
-      width: 100%;
-    }
-
-    .select-dropdown {
-      width: 100%;
+      .select-arrow::after {
+          border-top-color: var(--text-secondary);
+        }
     }
   }
 }

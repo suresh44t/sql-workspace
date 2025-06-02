@@ -20,7 +20,7 @@ export const ResultsExport: FC<ResultsExportInterface> = ({
   }; 
 
   return ( 
-    <div 
+    <section 
       className="results-export" 
       role="group" 
       aria-label={ariaLabel || "Export options"} 
@@ -38,16 +38,6 @@ export const ResultsExport: FC<ResultsExportInterface> = ({
         </Button> 
 
         <Button 
-          onClick={() => onExport('xlsx')} 
-          onKeyDown={e => handleKeyDown(e, 'xlsx')} 
-          disabled={disabled} 
-          size="sm" 
-          aria-label="Export as Excel" 
-        > 
-          Export Excel 
-        </Button> 
-
-        <Button 
           onClick={() => onExport('json')} 
           onKeyDown={e => handleKeyDown(e, 'json')} 
           disabled={disabled} 
@@ -57,7 +47,7 @@ export const ResultsExport: FC<ResultsExportInterface> = ({
           Export JSON 
         </Button> 
       </div> 
-    </div> 
+    </section> 
   ); 
 }; 
 
